@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تبدیل واحدهای حافظه</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            direction: rtl;
+            background-color: #f9f9f9;
+        }
+        .container {
+            margin: 50px auto;
+            width: 50%;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        select, input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>تبدیل واحدهای حافظه</h2>
+        <input type="number" id="value" placeholder="مقدار را وارد کنید">
+        <select id="unit">
+            <option value="B">Byte (B)</option>
+            <option value="KB">Kilobyte (KB)</option>
+            <option value="MB">Megabyte (MB)</option>
+            <option value="GB">Gigabyte (GB)</option>
+            <option value="TB">Terabyte (TB)</option>
+            <option value="PB">Petabyte (PB)</option>
+            <option value="EB">Exabyte (EB)</option>
+            <option value="ZB">Zettabyte (ZB)</option>
+            <option value="YB">Yottabyte (YB)</option>
+        </select>
+        <button onclick="convertStorage()">تبدیل کن</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convertStorage() {
+            let value = parseFloat(document.getElementById("value").value);
+            let unit = document.getElementById("unit").value;
+            
+            let units = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+            let index = units.indexOf(unit);
+            
+            let result = `<h3>نتایج تبدیل ${value} ${unit}:</h3>`;
+            
+            for (let i = 0; i < units.length; i++) {
+                let convertedValue = value * (1024 ** (index - i));
+                result += `<p>${convertedValue.toFixed(2)} ${units[i]}</p>`;
+            }
+            
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+
+</body>
+</html>
